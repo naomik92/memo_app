@@ -9,9 +9,12 @@
   <h2>memo app.</h2>
   <h3><%= @title %></h3>
   <p><%= @detail %></p>
-  <form>
-    <a href="http://localhost:4567/memo/<%= @id %>/edit">変更</a>
-    <button type="submit">削除</button>
+  <form action="/memo/<%= @id %>/edit" method="get">
+    <input type="submit" value="変更">
+  </form>
+  <form action="/memo/<%= @id %>" method="post">
+    <input type="hidden" id="_method" name="_method" value="DELETE">
+    <input type="submit" value="削除">
   </form>
 </body>
 </html>
