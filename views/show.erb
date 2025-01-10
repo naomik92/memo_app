@@ -7,12 +7,10 @@
 </head>
 <body>
   <h2>memo app.</h2>
-  <h3>メモ1</h3>
-  <p>メモの内容</p>
-  <p>メモの内容</p>
-  <p>メモの内容</p>
+  <h3><%= @title %></h3>
+  <p><%= @detail %></p>
   <form>
-    <button type="submit">変更</button>
+    <a href="http://localhost:4567/memo/<%= @id %>/edit">変更</a>
     <button type="submit">削除</button>
   </form>
 </body>

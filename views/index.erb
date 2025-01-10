@@ -7,12 +7,13 @@
 </head>
 <body>
   <h2>memo app.</h2>
-  <button type="submit">追加</button>
+  <a href="http://localhost:4567/new">追加</a>
   <ul>
-    <li>メモ1</li>
-    <li>メモ2</li>
-    <li>メモ3</li>
-    <li>メモ4</li>
+    <% @memos.each do |memo| %>
+      <li>
+        <a href="/memo/<%= memo[:id] %>"><%= memo[:title] %></a>
+      </li>
+    <% end %>
   </ul>
 </body>
 </html>
