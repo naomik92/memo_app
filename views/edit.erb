@@ -8,8 +8,8 @@
 <body>
   <h2>memo app.</h2>
   <form action="/memo/<%= @id %>" method="post">
-    <input type="hidden" id="_method" name="_method" value="PUT">
-    <input type="text" id="title" name="title" value=<%= @title %>>
+    <input type="hidden" id="_method" name="_method" value="PATCH">
+    <input type="text" id="title" name="title" value="<%= @title %>">
     <textarea id="detail" name="detail"><%= @detail %></textarea>
     <input type="submit" value="変更">
   </form>

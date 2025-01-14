@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>toppage - memo app.</title>
+  <title>index - memo app.</title>
 </head>
 <body>
   <h2>memo app.</h2>
@@ -13,7 +13,7 @@
   <ul>
     <% @memos.each do |memo| %>
       <li>
-        <a href="/memo/<%= memo[:id] %>"><%= memo[:title] %></a>
+        <a href="/memo/<%= memo[:id] %>"><%= h memo[:title] %></a>
       </li>
     <% end %>
   </ul>
