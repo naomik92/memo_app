@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @title %> - memo app.</title>
-</head>
-<body>
-  <h2>memo app.</h2>
-  <h3><%= h @title %></h3>
-  <p><%= h @detail %></p>
-  <form action="/memo/<%= @id %>/edit" method="get">
-    <input type="submit" value="変更">
-  </form>
-  <form action="/memo/<%= @id %>" method="post">
-    <input type="hidden" id="_method" name="_method" value="DELETE">
-    <input type="submit" value="削除">
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @title %> - memo app.</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <article>
+      <h1>memo app.</h1>
+      <section>
+        <h2><%= h @title %></h2>
+        <p><%= h @detail %></p>
+      </section>
+      <div class="form-action">
+        <form action="/memo/<%= @id %>/edit" method="get">
+          <input type="submit" value="変更">
+        </form>
+        <form action="/memo/<%= @id %>" method="post">
+          <input type="hidden" id="_method" name="_method" value="DELETE">
+          <input type="submit" value="削除">
+        </form>
+      </div>
+    </body>
+  </article>
 </html>

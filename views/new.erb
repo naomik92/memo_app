@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>newmemo - memo app.</title>
-</head>
-<body>
-  <h2>memo app.</h2>
-  <form action="/memo" method="post">
-    <input type="text" id="title" name="title">
-    <textarea id="detail" name="detail"></textarea>
-    <input type="submit" value="保存">
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newmemo - memo app.</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <article>
+      <h1>memo app.</h1>
+      <form action="/memo" method="post">
+        <div class="edit-memo">
+          <input type="text" id="title" name="title">
+          <textarea id="detail" name="detail"></textarea>
+          <input type="submit" value="保存">
+        </div>
+      </form>
+    </article>
+  </body>
 </html>

@@ -84,5 +84,5 @@ end
 
 helpers do
   include Rack::Utils
-  alias_method :h,:escape_html
+  alias_method :h, :escape_html
 end

@@ -1,0 +1,71 @@
+body {
+  background-color: #ddd;
+}
+
+h1 {
+  line-height: 1.5em;
+}
+
+h2 {
+  line-height: 1.3em;
+  font-size: 18px;
+}
+
+p {
+  min-height: 50px;
+}
+
+article {
+  background-color: #fff;
+  width: 600px;
+  margin: 20px;
+  padding: 25px;
+  color: #222;
+}
+
+.form-action {
+  display: flex;
+  justify-content: center;
+}
+
+.add-memo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.edit-memo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="text"], textarea {
+  background-color: #eee;
+  border: solid .5px #333;
+  width: 595px;
+  margin-bottom: 16px;
+}
+
+input[type="text"] {
+  font-size: 18px;
+  height: 20px;
+}
+
+textarea {
+  font-size: 16px;
+  height: 50px;
+}
+
+input[type="submit"] {
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  margin: 10px 20px;
+  border: solid 1px #333;
+  border-radius: 4px;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+}

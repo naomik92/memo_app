@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index - memo app.</title>
-</head>
-<body>
-  <h2>memo app.</h2>
-  <form action="/new" method="get">
-    <input type="submit" value="追加">
-  </form>
-  <ul>
-    <% @memos.each do |memo| %>
-      <li>
-        <a href="/memo/<%= memo[:id] %>"><%= h memo[:title] %></a>
-      </li>
-    <% end %>
-  </ul>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index - memo app.</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <article>
+      <div class="add-memo">
+        <h1>memo app.</h1>
+        <form action="/new" method="get">
+          <input type="submit" value="追加">
+        </form>
+      </div>
+      <section>
+        <ul>
+          <% @memos.each do |memo| %>
+            <li>
+              <a href="/memo/<%= memo[:id] %>"><%= h memo[:title] %></a>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    </article>
+  </body>
 </html>
