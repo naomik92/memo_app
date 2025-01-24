@@ -5,23 +5,23 @@ require 'sinatra/reloader'
 require 'json'
 require 'securerandom'
 
-get '/index' do
+get '/memos/index' do
   @memos = find_memos
   erb :index
 end
 
-get '/new' do
+get '/memos/new' do
   erb :new
 end
 
-post '/memo' do
+post '/memos' do
   title = params[:title]
   detail = params[:detail]
   add_memo(title, detail)
-  redirect '/index'
+  redirect '/memos/index'
 end
 
-get '/memo/:id' do
+get '/memos/:id' do
   memos = find_memos
   idx = memos.find_index do |hash|
     hash[:id] == params[:id]
@@ -32,7 +32,7 @@ get '/memo/:id' do
   erb :show
 end
 
-get '/memo/:id/edit' do
+get '/memos/:id/edit' do
   memos = find_memos
   idx = memos.find_index do |hash|
     hash[:id] == params[:id]
@@ -43,7 +43,7 @@ get '/memo/:id/edit' do
   erb :edit
 end
 
-patch '/memo/:id' do
+patch '/memos/:id' do
   memos = find_memos
   idx = memos.find_index do |hash|
     hash[:id] == params[:id]
@@ -53,10 +53,10 @@ patch '/memo/:id' do
   File.open('memo_data.json', 'w') do |file|
     JSON.dump(memos, file)
   end
-  redirect '/index'
+  redirect '/memos/index'
 end
 
-delete '/memo/:id' do
+delete '/memos/:id' do
   memos = find_memos
   idx = memos.find_index do |hash|
     hash[:id] == params[:id]
@@ -65,7 +65,7 @@ delete '/memo/:id' do
   File.open('memo_data.json', 'w') do |file|
     JSON.dump(memos, file)
   end
-  redirect '/index'
+  redirect '/memos/index'
 end
 
 def find_memos

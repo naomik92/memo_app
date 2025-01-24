@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit - memo app.</title>
-    <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
-    <article>
-      <h1>memo app.</h1>
-      <form action="/memo/<%= @id %>" method="post">
-        <div class="edit-memo">
-          <input type="hidden" id="_method" name="_method" value="PATCH">
-          <input type="text" id="title" name="title" value="<%= @title %>">
-          <textarea id="detail" name="detail"><%= @detail %></textarea>
-          <input type="submit" value="変更">
-        </div>
-      </form>
-    </article>
-  </body>
-</html>
+<article>
+  <h1>memo app.</h1>
+  <form action="/memos/<%= @id %>" method="post">
+    <div class="edit-memo">
+      <input type="hidden" id="_method" name="_method" value="PATCH">
+      <input type="text" id="title" name="title" value="<%= h @title %>">
+      <textarea id="detail" name="detail"><%= h @detail %></textarea>
+      <input type="submit" value="変更">
+    </div>
+  </form>
+</article>
