@@ -11,6 +11,6 @@
 3. `$ bundle install`でインストールします
 ## 使い方
 1. `$ bundle exec ruby app.jp`アプリケーションを立ち上げます
-2. [http://localhost:4567/memos/index](http://localhost:4567/memos/index)へアクセスすると、ローカル環境でメモアプリが使用できるようになります
+2. [http://localhost:4567/memos](http://localhost:4567/memos)へアクセスすると、ローカル環境でメモアプリが使用できるようになります
 
 このリポジトリは、FjordBootCampのプラクティス「Sinatraを使ってWebアプリケーションの基本を理解する」で作成しました。
