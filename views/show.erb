@@ -1,0 +1,16 @@
+<article>
+  <h1>memo app.</h1>
+  <section>
+    <h2><%= h @title %></h2>
+    <p><%= (h @detail).gsub(/\R/, "<br>") %></p>
+  </section>
+  <div class="form-action">
+    <form action="/memos/<%= @id %>/edit" method="get">
+      <input type="submit" value="変更">
+    </form>
+    <form action="/memos/<%= @id %>" method="post">
+      <input type="hidden" id="_method" name="_method" value="DELETE">
+      <input type="submit" value="削除">
+    </form>
+  </div>
+</article>

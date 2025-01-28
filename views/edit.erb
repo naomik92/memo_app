@@ -1,0 +1,11 @@
+<article>
+  <h1>memo app.</h1>
+  <form action="/memos/<%= @id %>" method="post">
+    <div class="edit-memo">
+      <input type="hidden" id="_method" name="_method" value="PATCH">
+      <input type="text" id="title" name="title" value="<%= h @title %>">
+      <textarea id="detail" name="detail"><%= h @detail %></textarea>
+      <input type="submit" value="変更">
+    </div>
+  </form>
+</article>
