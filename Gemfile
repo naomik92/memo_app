@@ -10,3 +10,4 @@ group :development do
 end
 gem 'erb_lint', require: false
 gem 'sinatra-contrib'
+gem 'pg'
