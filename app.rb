@@ -6,6 +6,8 @@ require 'json'
 require 'securerandom'
 require 'pg'
 
+CONN = PG::Connection.new(dbname: 'memo_app')
+
 get '/memos' do
   @memos = find_memos
   erb :index
@@ -16,9 +18,8 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  title = params[:title]
-  detail = params[:detail]
-  add_memo(title, detail)
+  id = SecureRandom.uuid
+  CONN.exec_params('INSERT INTO memo_data (id, title, detail) values ($1, $2, $3)', [id, params[:title], params[:detail]])
   redirect '/memos'
 end
 
@@ -45,27 +46,19 @@ get '/memos/:id/edit' do
 end
 
 patch '/memos/:id' do
-  connection.exec_params('UPDATE memo_data SET title = $2, detail = $3 WHERE id = $1', [params[:id], params[:title], params[:detail]])
+  CONN.exec_params('UPDATE memo_data SET title = $2, detail = $3 WHERE id = $1', [params[:id], params[:title], params[:detail]])
   redirect '/memos'
 end
 
 delete '/memos/:id' do
-  connection.exec_params('DELETE FROM memo_data WHERE id = $1', [params[:id]])
+  CONN.exec_params('DELETE FROM memo_data WHERE id = $1', [params[:id]])
   redirect '/memos'
 end
 
-def connection
-  PG::Connection.new(dbname: 'memo_app')
-end
-
 def find_memos
-  results = connection.exec('SELECT * FROM memo_data ORDER BY created_at ASC')
-  results.map { |result| result.transform_keys(&:to_sym) }
-end
-
-def add_memo(title, detail)
-  id = SecureRandom.uuid
-  connection.exec_params('INSERT INTO memo_data (id, title, detail) values ($1, $2, $3)', [id, title, detail])
+  CONN.exec('SELECT * FROM memo_data ORDER BY created_at ASC') do |results|
+    results.map { |result| result.transform_keys(&:to_sym) }
+  end
 end
 
 helpers do
