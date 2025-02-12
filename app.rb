@@ -4,6 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
 require 'securerandom'
+require 'pg'
 
 get '/memos' do
   @memos = find_memos
@@ -15,9 +16,8 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  title = params[:title]
-  detail = params[:detail]
-  add_memo(title, detail)
+  id = SecureRandom.uuid
+  settings.conn.exec_params('INSERT INTO memo_data (id, title, detail) values ($1, $2, $3)', [id, params[:title], params[:detail]])
   redirect '/memos'
 end
 
@@ -44,38 +44,22 @@ get '/memos/:id/edit' do
 end
 
 patch '/memos/:id' do
-  memos = find_memos
-  idx = memos.find_index do |hash|
-    hash[:id] == params[:id]
-  end
-  memos[idx][:title] = params[:title]
-  memos[idx][:detail] = params[:detail]
-  File.open('memo_data.json', 'w') do |file|
-    JSON.dump(memos, file)
-  end
+  settings.conn.exec_params('UPDATE memo_data SET title = $2, detail = $3 WHERE id = $1', [params[:id], params[:title], params[:detail]])
   redirect '/memos'
 end
 
 delete '/memos/:id' do
-  memos = find_memos
-  memos.delete_if { |hash| hash[:id] == params[:id] }
-  File.open('memo_data.json', 'w') do |file|
-    JSON.dump(memos, file)
-  end
+  settings.conn.exec_params('DELETE FROM memo_data WHERE id = $1', [params[:id]])
   redirect '/memos'
 end
 
-def find_memos
-  File.open('memo_data.json') do |file|
-    JSON.parse(file.read, symbolize_names: true)
-  end
+configure do
+  set :conn, PG::Connection.new(dbname: 'memo_app')
 end
 
-def add_memo(title, detail)
-  memos = find_memos
-  memos << { id: SecureRandom.uuid, title: title, detail: detail }
-  File.open('memo_data.json', 'w') do |file|
-    JSON.dump(memos, file)
+def find_memos
+  settings.conn.exec('SELECT * FROM memo_data ORDER BY created_at ASC') do |results|
+    results.map { |result| result.transform_keys(&:to_sym) }
   end
 end
 
